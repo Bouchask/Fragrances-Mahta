@@ -1,58 +1,126 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🏛️ Fragrances Mahta — Luxury E-Commerce Platform
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <strong>An exquisite, minimalist e-commerce web application built for luxury perfumes and premium personal care products.</strong>
 </p>
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🌟 Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+**Fragrances Mahta** is a modern, responsive, and performance-optimized e-commerce application powered by **Laravel 13** and **PHP 8.5**. Designed with a minimalist aesthetic, it provides customers with a frictionless, high-end shopping experience featuring a reactive multi-product shopping cart, transparent free delivery messaging, and a streamlined Cash-on-Delivery (COD) checkout system.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Live Production Environment: **[https://enzo-cadamia.vercel.app/](https://enzo-cadamia.vercel.app/)**
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## ✨ Key Features
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🛍️ Customer Experience & UI/UX
+- **Sophisticated Minimalist Theme:** Clean navy, white, and royal blue palette engineered for superior readability, modern typography, and luxury positioning.
+- **Dynamic Multi-Product Cart:** Reactive client-side JavaScript cart system that persists across sessions via `localStorage`. Supports stacking multiple unique products, real-time total calculations, intuitive quantity adjustment (`+` / `-`), and individual item removal.
+- **Frictionless Checkout Modal:** No mandatory account creation required. Customers can purchase immediately via *"Acheter maintenant"* directly on product pages or submit their entire grouped cart in one click.
+- **Clean Free Delivery & COD Integration:** Subtle, brand-aligned indicators emphasizing **100% Free Shipping** and safe payment upon receipt (Cash on Delivery).
+- **Interactive Celebration Modal:** Upon order validation, users are greeted with a sleek, animated confirmation interface designed to build confidence and outline next delivery steps.
+- **Social Media Connectivity:** Embedded direct links to brand ecosystems on **Instagram** ([@nabil.mahta](https://www.instagram.com/nabil.mahta)), **Facebook**, and **TikTok** ([@mahta.fragrances](https://www.tiktok.com/@mahta.fragrances)).
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### ⚡ Technical Capabilities & Performance
+- **Optimized PostgreSQL Database Layer:** Built to support strict type-casting and lightning-fast query execution on serverless platforms for product catalogs and custom filters (`?collection=yahya`, `?collection=soins-capillaires`).
+- **Secure Administrative Dashboard:** Protected back-office interface allowing administrators to inspect incoming orders, view individual product items within grouped customer purchases, track addresses and phone numbers, and update catalog offerings.
+- **HTTPS & Serverless Ready:** Zero mixed-content security bottlenecks; configured natively for deployment on Vercel utilizing Serverless Functions (`api/index.php`).
 
-## Agentic Development
+---
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## 🛠️ Technology Stack
+
+| Component | Technology |
+| :--- | :--- |
+| **Backend Framework** | Laravel 13 (PHP 8.5.2) |
+| **Database** | PostgreSQL |
+| **Frontend Architecture** | Blade Templating, Vanilla CSS (Design System Tokens), Vanilla JavaScript (Stateful Cart) |
+| **Hosting & CI/CD** | Vercel Serverless Platforms |
+| **Asset Bundling** | Vite / Node 22+ |
+
+---
+
+## 🚀 Local Development & Setup
+
+Follow these steps to configure and run the project in your local development environment:
+
+### 1. Prerequisites
+- **PHP** >= 8.3 (Tested on PHP 8.5.2)
+- **Composer** >= 2.x
+- **Node.js** >= 20.x & **NPM**
+- **PostgreSQL** or local database instance
+
+### 2. Installation
+Clone the repository and install project dependencies:
 
 ```bash
-composer require laravel/boost --dev
+git clone <your-repository-url>
+cd enzo-cadamia
 
-php artisan boost:install
+# Install backend PHP dependencies
+composer install
+
+# Install frontend Node dependencies & build assets
+npm install
+npm run build
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### 3. Environment Configuration
+Copy the sample environment file and generate your application key:
 
-## Contributing
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Configure your database connection in `.env`:
+```ini
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=your_database_name
+DB_USERNAME=your_username
+DB_PASSWORD=your_password
+```
 
-## Code of Conduct
+### 4. Database Migrations & Seeding
+Run migrations to generate tables for Products, Orders, and Order Items:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+php artisan migrate --seed
+```
 
-## Security Vulnerabilities
+### 5. Launch Local Server
+Start the Laravel development server alongside Vite (if developing frontend modules):
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+# Terminal 1: Laravel Server
+php artisan serve
 
-## License
+# Terminal 2 (Optional): Hot Reloading for JS/CSS
+npm run dev
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Visit `http://localhost:8000` in your browser to inspect the site.
+
+---
+
+## ☁️ Deployment on Vercel
+
+This repository is natively formatted for seamless serverless builds on **Vercel**:
+1. Connect the git repository to your Vercel Dashboard.
+2. Ensure Vercel environment variables map correctly to your cloud PostgreSQL instance (e.g., Vercel Postgres, Supabase, Neon).
+3. Deploy directly via terminal or push to the main git branch:
+
+```bash
+vercel --prod --yes
+```
+
+---
+
+## 📄 License
+
+This software and project structure are proprietary to **Fragrances Mahta**. All rights reserved.

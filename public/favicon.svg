@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Minimalist Luxury Navy Background -->
+  <rect width="64" height="64" rx="14" fill="#1a233a" />
+  
+  <!-- Sleek Storefront Boutique Motif -->
+  <g transform="translate(12, 14)" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Awning / Roof -->
+    <path d="M5 6L8 0h24l3 6" />
+    <!-- Awning Waves & Entrance -->
+    <path d="M2 6h36v6a4 4 0 0 1-4 4h-2a4 4 0 0 1-4-4 4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4 4 4 0 0 1-4 4H8a4 4 0 0 1-4-4 4 4 0 0 1-4 4H2V6z" />
+    <!-- Store Pillars & Door -->
+    <path d="M6 16v16a3 3 0 0 0 3 3h22a3 3 0 0 0 3-3V16" />
+    <line x1="20" y1="23" x2="20" y2="35" />
+  </g>
+</svg>

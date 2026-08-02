@@ -3,9 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fragrances Mahta - Accueil</title>
+    <title>Fragrances Mahta - Accueil | Soins Capillaires & Parfumerie d'Exception</title>
+    <meta name="description" content="Découvrez Fragrances Mahta, votre boutique de confiance pour les élixirs capillaires, produits de lissage professionnel Lizze et cosmétiques d'exception. Commandez en toute sécurité avec paiement à la livraison au Maroc.">
+    <meta name="keywords" content="Fragrances Mahta, soins capillaires, lissage Lizze, parfums luxe, élixir capillaire, cosmétiques Maroc, livraison gratuite, paiement à la livraison">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Fragrances Mahta - Accueil | Soins Capillaires & Parfumerie">
+    <meta property="og:description" content="Boutique en ligne officielle de soins capillaires professionnels et élixirs de beauté avec livraison au Maroc et paiement à la réception.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:site_name" content="Fragrances Mahta">
+    <meta property="og:image" content="{{ asset('image/accuel.webp') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Fragrances Mahta - Accueil">
+    <meta name="twitter:description" content="Soins capillaires professionnels et élixirs d'exception avec paiement à la livraison.">
+    <meta name="twitter:image" content="{{ asset('image/accuel.webp') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('style.css') }}">
+    <link rel="stylesheet" href="{{ asset('style.css') }}?v=2.0">
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "Store",
+      "name": "Fragrances Mahta",
+      "url": "{{ url('/') }}",
+      "logo": "{{ asset('favicon.svg') }}",
+      "description": "Boutique en ligne officielle de soins capillaires professionnels Lizze et élixirs de beauté au Maroc.",
+      "image": "{{ asset('image/accuel.webp') }}",
+      "priceRange": "$$"
+    }
+    </script>
 </head>
 <body>
 
@@ -19,12 +46,16 @@
             </div>
             
             <div class="header__logo">
-                <a href="{{ route('home') }}" style="text-decoration: none; color: inherit;"><h2>Fragrances Mahta</h2></a>
+                <a href="{{ route('home') }}" style="text-decoration: none; color: inherit;">
+                    <h2 style="display: inline-flex; align-items: center; gap: 10px; margin: 0;">
+                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="color: #cbd5e1; flex-shrink: 0;"><path d="M3 7l1-4h16l1 4"></path><path d="M2 7h20v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2 2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2 2 2 0 0 1-2 2H9a2 2 0 0 1-2-2 2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7z"></path><path d="M4 13v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><line x1="12" y1="17" x2="12" y2="22"></line></svg>
+                        <span>Fragrances Mahta</span>
+                    </h2>
+                </a>
             </div>
             
             <div class="header__icons-right">
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" class="cart-icon" onclick="openCart()"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                <svg viewBox="0 0 24 24" width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" class="cart-icon" onclick="openCart()" style="cursor: pointer;"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
             </div>
         </div>
         <nav class="header__nav">
@@ -38,10 +69,77 @@
 
     <main class="main-content homepage-content">
         
-        <!-- Hero Banner -->
-        <section class="hero-banner">
-            <img src="image/accuel.webp" alt="Fragrances Mahta" class="hero-banner__image">
-        </section>
+        <!-- Hero Banner / Carousel -->
+        @if(isset($banners) && $banners->count() >= 2)
+            <div class="hero-carousel-container" id="heroCarousel">
+                @foreach($banners as $index => $banner)
+                    <div class="hero-carousel-slide {{ $index === 0 ? 'active' : '' }}">
+                        <img src="{{ $banner->image_data }}" alt="{{ $banner->title ?? 'Fragrances Mahta' }}" class="hero-banner__image">
+                    </div>
+                @endforeach
+
+                <button class="hero-carousel-btn hero-carousel-btn--prev" onclick="changeSlide(-1)" aria-label="Précédent">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <button class="hero-carousel-btn hero-carousel-btn--next" onclick="changeSlide(1)" aria-label="Suivant">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+                </button>
+
+                <div class="hero-carousel-dots">
+                    @foreach($banners as $index => $banner)
+                        <span class="hero-carousel-dot {{ $index === 0 ? 'active' : '' }}" onclick="goToSlide({{ $index }})"></span>
+                    @endforeach
+                </div>
+            </div>
+
+            <script>
+                let currentSlide = 0;
+                let slides, dots, slideInterval;
+
+                function showSlide(n) {
+                    if (!slides || slides.length === 0) return;
+                    slides[currentSlide].classList.remove('active');
+                    dots[currentSlide].classList.remove('active');
+                    currentSlide = (n + slides.length) % slides.length;
+                    slides[currentSlide].classList.add('active');
+                    dots[currentSlide].classList.add('active');
+                }
+
+                function changeSlide(direction) {
+                    showSlide(currentSlide + direction);
+                    resetTimer();
+                }
+
+                function goToSlide(index) {
+                    showSlide(index);
+                    resetTimer();
+                }
+
+                function startTimer() {
+                    if (slideInterval) clearInterval(slideInterval);
+                    slideInterval = setInterval(() => { showSlide(currentSlide + 1); }, 5000);
+                }
+
+                function resetTimer() {
+                    clearInterval(slideInterval);
+                    startTimer();
+                }
+
+                document.addEventListener("DOMContentLoaded", function() {
+                    slides = document.querySelectorAll('.hero-carousel-slide');
+                    dots = document.querySelectorAll('.hero-carousel-dot');
+                    startTimer();
+                });
+            </script>
+        @elseif(isset($banners) && $banners->count() == 1)
+            <section class="hero-banner">
+                <img src="{{ $banners->first()->image_data }}" alt="{{ $banners->first()->title ?? 'Fragrances Mahta' }}" class="hero-banner__image">
+            </section>
+        @else
+            <section class="hero-banner">
+                <img src="{{ asset('image/accuel.webp') }}" alt="Fragrances Mahta" class="hero-banner__image">
+            </section>
+        @endif
 
         <!-- Collections Section -->
         <section class="collections-section">
@@ -80,7 +178,7 @@
             @include('front.partials.social-icons')
         </div>
         <div class="footer__bottom">
-            <p>&copy; 2026, Ma boutique · <a href="{{ route('login') }}" style="text-decoration: underline;">Admin Login</a></p>
+            <p>&copy; 2026, Fragrances Mahta. Tous droits réservés.</p>
         </div>
     </footer>
 
@@ -103,11 +201,7 @@
         </nav>
 
         <div class="mobile-nav__footer">
-            <a href="#" class="mobile-nav__login">
-                <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-                Connexion
-            </a>
-            <div class="mobile-nav__socials" style="display: flex; gap: 16px; align-items: center;">
+            <div class="mobile-nav__socials" style="display: flex; gap: 16px; align-items: center; justify-content: center; width: 100%; margin-top: 10px;">
                 @include('front.partials.social-icons')
             </div>
         </div>

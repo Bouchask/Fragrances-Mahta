@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Collection;
 use App\Models\Product;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -11,7 +12,8 @@ class FrontendController extends Controller
     public function index()
     {
         $collections = Collection::all();
-        return response()->view('front.index', compact('collections'))
+        $banners = Banner::where('is_active', true)->orderBy('sort_order', 'asc')->latest()->get();
+        return response()->view('front.index', compact('collections', 'banners'))
             ->header('Cache-Control', 'public, max-age=60, s-maxage=300, stale-while-revalidate=600');
     }
 

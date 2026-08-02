@@ -31,8 +31,8 @@
   "env": {
     "APP_ENV": "production",
     "APP_DEBUG": "false",
-    "APP_URL": "https://enzo-cadamia.vercel.app",
-    "ASSET_URL": "https://enzo-cadamia.vercel.app",
+    "APP_URL": "https://fragrances-mahta.vercel.app",
+    "ASSET_URL": "https://fragrances-mahta.vercel.app",
     "LOG_CHANNEL": "stderr",
     "VIEW_COMPILED_PATH": "/tmp",
     "SESSION_DRIVER": "cookie",

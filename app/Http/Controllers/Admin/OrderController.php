@@ -26,6 +26,11 @@ class OrderController extends Controller
             $query->whereDate('created_at', $request->date);
         }
 
+        // Filter by Status
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
         // Filter by Product
         if ($request->filled('product_id')) {
             $query->whereHas('items', function ($q) use ($request) {
@@ -50,7 +55,7 @@ class OrderController extends Controller
     public function update(Request $request, Order $order)
     {
         $request->validate([
-            'status' => 'required|string|in:Créé,Validation de confirmation,Livré'
+            'status' => 'required|string|in:Créé,Validation de confirmation,Livré,Retour'
         ]);
 
         $order->update([
@@ -58,5 +63,13 @@ class OrderController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Statut de la commande mis à jour.');
+    }
+
+    public function destroy(Order $order)
+    {
+        $order->items()->delete();
+        $order->delete();
+
+        return redirect()->back()->with('success', 'Commande supprimée avec succès.');
     }
 }

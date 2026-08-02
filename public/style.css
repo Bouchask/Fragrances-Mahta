@@ -80,6 +80,9 @@ a {
     font-size: 28px;
     font-weight: 400;
     letter-spacing: 1px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .header__nav {
@@ -188,7 +191,8 @@ a {
 }
 
 .product-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(26, 35, 58, 0.08);
 }
 
 .product-card__link {
@@ -210,6 +214,11 @@ a {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.product-card:hover .product-card__image-wrapper img {
+    transform: scale(1.06);
 }
 
 .badge {
@@ -428,6 +437,98 @@ a {
     max-height: 700px;
 }
 
+/* ============================================================
+   HERO CAROUSEL / SLIDESHOW (10/10 Design)
+   ============================================================ */
+.hero-carousel-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 60px;
+    overflow: hidden;
+    background-color: #0d111a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.hero-carousel-slide {
+    display: none;
+    width: 100%;
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.hero-carousel-slide.active {
+    display: block;
+    animation: carouselFadeIn 0.7s;
+}
+
+@keyframes carouselFadeIn {
+    from { opacity: 0.2; transform: scale(1.01); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.hero-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(26, 35, 58, 0.75);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.hero-carousel-btn:hover {
+    background: rgba(59, 91, 219, 0.95);
+    transform: translateY(-50%) scale(1.12);
+    box-shadow: 0 4px 20px rgba(59, 91, 219, 0.4);
+}
+
+.hero-carousel-btn--prev {
+    left: 20px;
+}
+
+.hero-carousel-btn--next {
+    right: 20px;
+}
+
+.hero-carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 20;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 8px 14px;
+    border-radius: 30px;
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.hero-carousel-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.hero-carousel-dot.active {
+    background: #ffffff;
+    transform: scale(1.25);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+}
+
 .collections-section {
     max-width: var(--page-width);
     margin: 0 auto;
@@ -450,12 +551,13 @@ a {
     display: flex;
     flex-direction: column;
     background: #fff;
-    transition: transform 0.2s;
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
     text-align: center;
 }
 
 .collection-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(26, 35, 58, 0.08);
 }
 
 .collection-card__link {
@@ -478,6 +580,11 @@ a {
     max-width: 80%;
     max-height: 80%;
     object-fit: contain;
+    transition: transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.collection-card:hover .collection-card__image-wrapper img {
+    transform: scale(1.08);
 }
 
 .collection-badge {

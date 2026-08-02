@@ -24,6 +24,9 @@
                     <x-nav-link :href="route('admin.orders.index')" :active="request()->routeIs('admin.orders.*')">
                         {{ __('Commandes') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.banners.index')" :active="request()->routeIs('admin.banners.*')">
+                        {{ __('Bannières (Accueil)') }}
+                    </x-nav-link>
                 </div>
             </div>
 

@@ -10,7 +10,7 @@
 
 **Fragrances Mahta** is a modern, responsive, and performance-optimized e-commerce application powered by **Laravel 13** and **PHP 8.5**. Designed with a minimalist aesthetic, it provides customers with a frictionless, high-end shopping experience featuring a reactive multi-product shopping cart, transparent free delivery messaging, and a streamlined Cash-on-Delivery (COD) checkout system.
 
-Live Production Environment: **[https://enzo-cadamia.vercel.app/](https://enzo-cadamia.vercel.app/)**
+Live Production Environment: **[https://fragrances-mahta.vercel.app/](https://fragrances-mahta.vercel.app/)**
 
 ---
 

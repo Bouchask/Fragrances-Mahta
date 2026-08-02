@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /login
+Disallow: /logout
+Allow: /
+
+Sitemap: https://fragrances-mahta.vercel.app/sitemap.xml

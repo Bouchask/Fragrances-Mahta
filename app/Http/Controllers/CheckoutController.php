@@ -77,6 +77,20 @@ class CheckoutController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success', 'Merci pour votre commande ! Nous vous appellerons pour la vérification finale et la livraison.');
+        // Build concise Darija WhatsApp confirmation message
+        $whatsappMsg = "Salam, yallah dert commande fe Fragrances Mahta :\n\n";
+        $whatsappMsg .= "👤 *Smya* : " . $request->name . "\n";
+        $whatsappMsg .= "📞 *Tél* : " . $request->phone . "\n";
+        $whatsappMsg .= "📍 *Mdina/Adresse* : " . $request->city . "\n\n";
+        $whatsappMsg .= "🛍️ *Selaa* :\n";
+        foreach ($itemsToOrder as $item) {
+            $whatsappMsg .= "▪️ " . $item['product']->name . " *(x" . $item['quantity'] . ")*\n";
+        }
+        $whatsappMsg .= "\n💰 *Total* : *" . $totalPrice . " DH* *(Tawsil fabor)*\n\n";
+        $whatsappMsg .= "Wach selaa mojoda bach tsiftohali ? Choukran 🙏";
+
+        $whatsappUrl = "https://api.whatsapp.com/send?phone=212639048453&text=" . rawurlencode($whatsappMsg);
+
+        return redirect()->back()->with('success', 'Merci pour votre commande !')->with('whatsapp_url', $whatsappUrl);
     }
 }

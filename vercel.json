@@ -12,7 +12,7 @@
   ],
   "routes": [
     {
-      "src": "/(.*\\.(css|js|ico|txt|jpg|jpeg|png|webp|svg|woff|woff2|ttf|otf|eot|mp4|webm|pdf|zip))$",
+      "src": "/(.*\\.(css|js|html|htm|ico|txt|jpg|jpeg|png|webp|svg|woff|woff2|ttf|otf|eot|mp4|webm|pdf|zip))$",
       "dest": "/public/$1"
     },
     {

@@ -106,8 +106,16 @@
         </div>
         
         <p class="clean-success-info">
-            Notre équipe vous contactera par téléphone dans quelques instants pour confirmer l'expédition de votre colis.
+            Pour accélérer le traitement de votre commande et vérifier immédiatement la disponibilité de vos produits, cliquez ci-dessous :
         </p>
+
+        @if(session('whatsapp_url'))
+        <a href="{{ session('whatsapp_url') }}" target="_blank" class="btn-whatsapp-confirm">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M11.944 0A12 12 0 0 0 0 12a11.96 11.96 0 0 0 1.944 6.556L.067 24l5.63-1.852A11.96 11.96 0 0 0 11.944 24c6.627 0 12-5.373 12-12s-5.373-12-12-12zm6.98 17.15c-.295.83-1.72 1.583-2.38 1.66-.662.08-1.52.122-4.9-1.28-4.32-1.79-7.085-6.215-7.302-6.505-.215-.29-1.74-2.32-1.74-4.426 0-2.107 1.11-3.14 1.503-3.57.393-.43.86-.54 1.147-.54.286 0 .573.004.823.018.266.015.623-.1.977.75.365.88 1.253 3.053 1.36 3.277.108.225.18.485.036.776-.143.29-.215.473-.43.725-.215.253-.448.56-.642.753-.215.215-.443.45-.194.88.25.43 1.11 1.83 2.382 2.966 1.636 1.46 3.017 1.91 3.447 2.126.43.215.68.18.932-.108.25-.29 1.075-1.253 1.36-1.685.287-.43.574-.358.968-.215.394.143 2.508 1.182 2.937 1.397.43.215.717.323.823.502.108.18.108 1.039-.187 1.87z"/>
+            <span>💬 Confirmer sur WhatsApp (Wach disponible ?)</span>
+        </a>
+        @endif
         
         <button type="button" class="btn btn--solid btn--blue btn-success-close" onclick="closeHappyModal()">
             Continuer mes achats
@@ -130,8 +138,8 @@
 .clean-success-content {
     background: #ffffff;
     width: 90%;
-    max-width: 440px;
-    border-radius: 12px;
+    max-width: 460px;
+    border-radius: 16px;
     border: 1px solid #e2e8f0;
     padding: 35px 28px 28px;
     text-align: center;
@@ -154,18 +162,18 @@
 .clean-success-subtitle {
     font-size: 14px;
     color: #5c6a82;
-    margin-bottom: 24px;
+    margin-bottom: 22px;
     line-height: 1.5;
 }
 .clean-livraison-banner {
     background: #f8fafc;
     border: 1px solid #e2e8f0;
-    border-radius: 8px;
+    border-radius: 10px;
     padding: 14px 16px;
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     text-align: left;
 }
 .banner-icon {
@@ -187,24 +195,48 @@
 }
 .clean-success-info {
     font-size: 13px;
-    color: #5c6a82;
-    line-height: 1.6;
-    margin-bottom: 26px;
+    color: #475569;
+    line-height: 1.5;
+    margin-bottom: 18px;
+    font-weight: 500;
+}
+.btn-whatsapp-confirm {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    background: #25D366;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    padding: 14px 20px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.35);
+    transition: all 0.2s ease;
+}
+.btn-whatsapp-confirm:hover {
+    background: #20bd5a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
 }
 .btn-success-close {
     width: 100%;
-    background: #3b5bdb;
-    color: #ffffff;
-    border: none;
-    padding: 13px 24px;
+    background: #f1f5f9;
+    color: #475569 !important;
+    border: 1px solid #cbd5e1;
+    padding: 12px 24px;
     border-radius: 50px;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s ease, transform 0.1s ease;
+    transition: all 0.2s ease;
 }
 .btn-success-close:hover {
-    background: #2e4bc2;
+    background: #e2e8f0;
+    color: #1e293b !important;
 }
 @keyframes cleanFadeIn {
     from { opacity: 0; }

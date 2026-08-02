@@ -12,6 +12,11 @@ Route::get('/catalogue', [FrontendController::class, 'catalogue'])->name('catalo
 Route::get('/product/{slug}', [FrontendController::class, 'product'])->name('product');
 Route::get('/contact', [FrontendController::class, 'contact'])->name('contact');
 Route::post('/checkout', [\App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout');
+Route::get('/googlefe4cf07cb99ee2c2.html', function () {
+    return response('google-site-verification: googlefe4cf07cb99ee2c2.html', 200)
+        ->header('Content-Type', 'text/html');
+});
+
 Route::get('/sitemap.xml', function () {
     $products = \App\Models\Product::all();
     $content = '<?xml version="1.0" encoding="UTF-8"?>';

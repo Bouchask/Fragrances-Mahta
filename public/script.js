@@ -266,21 +266,75 @@ function closeCheckout() {
 }
 
 /**
+ * Update UI summary inside the checkout modal (Subtotal, Total, Item preview)
+ */
+function updateCheckoutUI(items) {
+    const subtotalEl = document.getElementById('checkout-subtotal');
+    const totalEl = document.getElementById('checkout-total-price');
+    const submitBtn = document.getElementById('btn-submit-checkout');
+    const previewContainer = document.getElementById('checkout-items-preview');
+
+    let total = 0;
+    let previewHTML = '';
+
+    if (items && items.length > 0) {
+        items.forEach(item => {
+            const itemPrice = parseFloat(item.price) || 0;
+            const itemQty = parseInt(item.quantity) || 1;
+            total += itemPrice * itemQty;
+
+            previewHTML += `
+                <div class="preview-item-card">
+                    ${item.image ? `<img src="${item.image}" class="preview-item-thumb" alt="${item.name || 'Produit'}">` : '<div class="preview-item-thumb"></div>'}
+                    <div class="preview-item-info">
+                        <p class="preview-item-name">${item.name || 'Produit'}</p>
+                        <span class="preview-item-qty">Quantité : x${itemQty}</span>
+                    </div>
+                    <span class="preview-item-price">${(itemPrice * itemQty).toFixed(2)} dh</span>
+                </div>
+            `;
+        });
+    }
+
+    const totalStr = total.toFixed(2) + ' dh';
+    if (subtotalEl) subtotalEl.textContent = totalStr;
+    if (totalEl) totalEl.textContent = totalStr;
+    if (submitBtn) submitBtn.textContent = 'Terminez votre achat - ' + totalStr;
+    if (previewContainer) previewContainer.innerHTML = previewHTML;
+}
+
+/**
  * Simulate "Buy Now" action directly from a product page
  */
-function buyNow(productId) {
+function buyNow(productId, name, price, image) {
     const qtyInput = document.getElementById('qty-input');
     const checkoutProd = document.getElementById('checkout-product-id');
     const checkoutQty = document.getElementById('checkout-quantity');
     const checkoutCartData = document.getElementById('checkout-cart-data');
 
+    const qty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
+
     if (checkoutCartData) checkoutCartData.value = ''; // Direct buy now does not use cart array
     if (checkoutProd && productId) {
         checkoutProd.value = productId;
     }
-    if (qtyInput && checkoutQty) {
-        checkoutQty.value = qtyInput.value;
+    if (checkoutQty) {
+        checkoutQty.value = qty;
     }
+
+    // Attempt DOM fallback if arguments omitted
+    const prodName = name || (document.querySelector('.product-detail__info h1') ? document.querySelector('.product-detail__info h1').textContent.trim() : 'Produit Fragrance');
+    const prodPrice = parseFloat(price) || (document.querySelector('.price-new') ? parseFloat(document.querySelector('.price-new').textContent.replace(/[^0-9.]/g, '')) : 0);
+    const prodImg = image || (document.querySelector('.product-detail__media img') ? document.querySelector('.product-detail__media img').src : '');
+
+    updateCheckoutUI([{
+        id: productId,
+        name: prodName,
+        price: prodPrice,
+        image: prodImg,
+        quantity: qty
+    }]);
+
     openCheckoutModal();
 }
 
@@ -297,5 +351,8 @@ function checkout() {
     if (checkoutQty) checkoutQty.value = '';
     if (checkoutCartData) checkoutCartData.value = JSON.stringify(cartItems);
 
+    updateCheckoutUI(cartItems);
+
     openCheckoutModal();
 }
+

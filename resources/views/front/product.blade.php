@@ -120,7 +120,7 @@
 
                 <div class="product-detail__actions">
                     <button type="button" class="btn btn--outline btn--full" onclick="addToCart({{ $product->id }}, '{{ addslashes($product->name) }}', {{ $product->price }}, {{ $product->original_price ?: 'null' }}, document.querySelector('.product-detail__media img') ? document.querySelector('.product-detail__media img').src : '', parseInt(document.getElementById('qty-input').value) || 1)">Ajouter au panier</button>
-                    <button type="button" class="btn btn--solid btn--full" onclick="buyNow({{ $product->id }})">Acheter maintenant</button>
+                    <button type="button" class="btn btn--solid btn--full" onclick="buyNow({{ $product->id }}, '{{ addslashes($product->name) }}', {{ $product->price }}, document.querySelector('.product-detail__media img') ? document.querySelector('.product-detail__media img').src : '')">Acheter maintenant</button>
                 </div>
 
                 <div class="product-detail__share">

@@ -108,6 +108,27 @@
                             </thead>
                             <tbody class="divide-y divide-gray-100 text-sm text-gray-800">
                                 @forelse($orders as $order)
+                                    @php
+                                        // Format phone number for WhatsApp Morocco (convert leading 0 to 212)
+                                        $cleanPhone = preg_replace('/[^0-9]/', '', $order->phone);
+                                        if (str_starts_with($cleanPhone, '0')) {
+                                            $cleanPhone = '212' . substr($cleanPhone, 1);
+                                        }
+
+                                        // Build compact Arabic confirmation message with order details
+                                        $wtsItems = "";
+                                        foreach($order->items as $i) {
+                                            $wtsItems .= "▪️ " . (optional($i->product)->name ?? 'Produit') . " (x" . $i->quantity . ")\n";
+                                        }
+
+                                        $wtsMsg = "تم تأكيد طلبك بنجاح، السيد(ة) " . $order->name . ". 🌸\n\n";
+                                        $wtsMsg .= "📦 *معلومات الطلب:* \n" . $wtsItems;
+                                        $wtsMsg .= "📍 *العنوان:* " . $order->city . "\n";
+                                        $wtsMsg .= "💰 *المجموع:* *" . number_format($order->total_price, 2) . " درهم* (توصيل مجاني)\n\n";
+                                        $wtsMsg .= "شكرًا لثقتك بنا، وسيتم التواصل معك قريبًا من طرف شركة التوصيل لتأكيد موعد الاستلام. نتمنى لك تجربة ممتازة مع منتجنا. 💖";
+
+                                        $wtsUrl = "https://api.whatsapp.com/send?phone=" . $cleanPhone . "&text=" . rawurlencode($wtsMsg);
+                                    @endphp
                                     <tr class="hover:bg-gray-50 transition duration-150">
                                         <td class="py-3.5 px-4 font-bold text-slate-700">#{{ $order->id }}</td>
                                         <td class="py-3.5 px-4 text-xs font-medium text-gray-500 whitespace-nowrap">
@@ -115,7 +136,16 @@
                                             <span class="text-gray-400">{{ $order->created_at->format('H:i') }}</span>
                                         </td>
                                         <td class="py-3.5 px-4">
-                                            <div class="font-bold text-gray-900">{{ $order->name }}</div>
+                                            <div class="flex items-center gap-2 mb-1">
+                                                <span class="font-bold text-gray-900">{{ $order->name }}</span>
+                                                <a href="{{ $wtsUrl }}" target="_blank" title="Envoyer confirmation par WhatsApp" 
+                                                   class="inline-flex items-center gap-1 px-2 py-0.5 bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-xs rounded-full shadow-2xs transition hover:scale-105 shrink-0">
+                                                    <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor">
+                                                        <path d="M11.944 0A12 12 0 0 0 0 12a11.96 11.96 0 0 0 1.944 6.556L.067 24l5.63-1.852A11.96 11.96 0 0 0 11.944 24c6.627 0 12-5.373 12-12s-5.373-12-12-12zm6.98 17.15c-.295.83-1.72 1.583-2.38 1.66-.662.08-1.52.122-4.9-1.28-4.32-1.79-7.085-6.215-7.302-6.505-.215-.29-1.74-2.32-1.74-4.426 0-2.107 1.11-3.14 1.503-3.57.393-.43.86-.54 1.147-.54.286 0 .573.004.823.018.266.015.623-.1.977.75.365.88 1.253 3.053 1.36 3.277.108.225.18.485.036.776-.143.29-.215.473-.43.725-.215.253-.448.56-.642.753-.215.215-.443.45-.194.88.25.43 1.11 1.83 2.382 2.966 1.636 1.46 3.017 1.91 3.447 2.126.43.215.68.18.932-.108.25-.29 1.075-1.253 1.36-1.685.287-.43.574-.358.968-.215.394.143 2.508 1.182 2.937 1.397.43.215.717.323.823.502.108.18.108 1.039-.187 1.87z"/>
+                                                    </svg>
+                                                    <span>WhatsApp</span>
+                                                </a>
+                                            </div>
                                             <div class="text-xs text-gray-500 flex items-center gap-1.5 mt-0.5">
                                                 <span class="font-mono bg-gray-100 px-1.5 py-0.5 rounded text-gray-700 font-medium">{{ $order->phone }}</span>
                                                 <span>•</span>

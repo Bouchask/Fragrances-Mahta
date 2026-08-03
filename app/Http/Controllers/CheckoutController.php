@@ -77,17 +77,17 @@ class CheckoutController extends Controller
             ]);
         }
 
-        // Build concise Darija WhatsApp confirmation message
-        $whatsappMsg = "Salam, yallah dert commande fe Fragrances Mahta :\n\n";
-        $whatsappMsg .= "👤 *Smya* : " . $request->name . "\n";
-        $whatsappMsg .= "📞 *Tél* : " . $request->phone . "\n";
-        $whatsappMsg .= "📍 *Mdina/Adresse* : " . $request->city . "\n\n";
-        $whatsappMsg .= "🛍️ *Selaa* :\n";
+        // Build simple & strict Darija Arabic WhatsApp confirmation message
+        $whatsappMsg = "السلام عليكم، يلاه درت طلبية عند Fragrances Mahta وبغيت نأكدها: 🌸\n\n";
+        $whatsappMsg .= "👤 *الاسم:* " . $request->name . "\n";
+        $whatsappMsg .= "📞 *الهاتف:* " . $request->phone . "\n";
+        $whatsappMsg .= "📍 *العنوان:* " . $request->city . "\n\n";
+        $whatsappMsg .= "🛍️ *الطلب:* \n";
         foreach ($itemsToOrder as $item) {
             $whatsappMsg .= "▪️ " . $item['product']->name . " *(x" . $item['quantity'] . ")*\n";
         }
-        $whatsappMsg .= "\n💰 *Total* : *" . $totalPrice . " DH* *(Tawsil fabor)*\n\n";
-        $whatsappMsg .= "Wach selaa mojoda bach tsiftohali ? Choukran 🙏";
+        $whatsappMsg .= "\n💰 *المجموع:* *" . $totalPrice . " درهم* *(التوصيل مجاني)*\n\n";
+        $whatsappMsg .= "المرجو تأكيد الطلبية باش ترسلوا ليا الأمانة. شكراً 🙏";
 
         $whatsappUrl = "https://api.whatsapp.com/send?phone=212639048453&text=" . rawurlencode($whatsappMsg);
 

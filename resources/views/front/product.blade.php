@@ -41,6 +41,7 @@
       }
     }
     </script>
+    @include('front.partials.analytics')
 </head>
 <body>
 

@@ -27,6 +27,7 @@
       "description": "Catalogue complet des produits de soins capillaires professionnels Fragrances Mahta et Lizze."
     }
     </script>
+    @include('front.partials.analytics')
 </head>
 <body>
 

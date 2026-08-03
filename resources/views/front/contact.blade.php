@@ -26,6 +26,7 @@
       "description": "Page de contact officielle et support client pour Fragrances Mahta au Maroc."
     }
     </script>
+    @include('front.partials.analytics')
 </head>
 <body>
 
